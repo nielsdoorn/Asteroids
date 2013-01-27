@@ -1,5 +1,5 @@
 // grootte van de asteroids
-const BIG = 60;
+const BIG = 40;
 const SMALL = 10;
 
 // snelheidsfactor van de raketten
@@ -10,15 +10,17 @@ const MAX_ROCKETS = 20;
 // explosion stuff
 const EXPLOSION_SPEED = 32;
 
-const EXPLOSION_LIFETIME = 40;
+const EXPLOSION_LIFETIME = 30;
 
-const NUM_OF_PARTICLES = 20;
+const NUM_OF_PARTICLES = 12;
+
+const NUM_OF_SMALL_ASTEROIDS = 30;
 
 // de versnelling bij pijltje omhoog
 const ACCELERATION = 0.09;
 
 // rotatie eenheden, hoeveel draai je als je pijljte indrukt
-const NORMAL_ROTATION = 0.03;
+const NORMAL_ROTATION = 0.05;
 
 // variabelen
 var canvas;
@@ -299,7 +301,7 @@ function cleanUp() {
 			explode(asteroid[0], asteroid[1], [255,0,0]);
 			if (asteroid[4] == BIG) {
 				// voeg nieuwe, kleine asteroids toe
-				for (var j = 0; j < 40; j++) {
+				for (var j = 0; j < NUM_OF_SMALL_ASTEROIDS; j++) {
 					var newAsteroid = [asteroid[0],
 									asteroid[1],
 									(Math.random()*2) - 1,
