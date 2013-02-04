@@ -3,9 +3,9 @@ const BIG = 40;
 const SMALL = 10;
 
 // snelheidsfactor van de raketten
-const ROCKET_SPEED = 8;
+const ROCKET_SPEED = 7;
 // maximaal aantal raketten
-const MAX_ROCKETS = 20;
+const MAX_ROCKETS = 30;
 
 // explosion stuff
 const EXPLOSION_SPEED = 32;
@@ -141,7 +141,7 @@ function initAnimation() {
 			stopFiring = true;
 		} 
 
-		if (rocketsFired == 0) {
+		if (rocketsFired <= 0) {
 			stopFiring = false;
 		}
 
@@ -149,7 +149,7 @@ function initAnimation() {
 			fire();
 		}
 		if (stopFiring) {
-			rocketsFired--;
+			rocketsFired -= 5;
 		}
 
 		detectCollisions();
@@ -391,7 +391,10 @@ function drawRockets(ctx) {
 		ctx.translate(rocket[0], rocket[1]);
 		ctx.rotate(rocket[2]);
 		ctx.translate(-2, -10);
-		roundRect(ctx, -1, 0, 4, 4, 2);
+		//roundRect(ctx, -1, 0, 4, 4, 2);
+		ctx.beginPath();
+		ctx.arc(1, 4, 2, 0, Math.PI * 2, true);
+		ctx.closePath();
 		ctx.fill();
 		ctx.restore();
 	}
@@ -570,18 +573,4 @@ function distance(x1, y1, x2, y2) {
 	var b = Math.abs(y1 - y2);
 	var c = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
 	return c;
-}
-
-function roundRect(ctx, x, y, width, height, radius) {
-	ctx.beginPath();
-	ctx.moveTo(x + radius, y);
-	ctx.lineTo(x + width - radius, y);
-	ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-	ctx.lineTo(x + width, y + height - radius);
-	ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-	ctx.lineTo(x + radius, y + height);
-	ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-	ctx.lineTo(x, y + radius);
-	ctx.quadraticCurveTo(x, y, x + radius, y);
-	ctx.closePath();     
 }
