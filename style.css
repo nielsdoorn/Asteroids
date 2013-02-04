@@ -5,14 +5,17 @@ html {
 	min-height: 100%;
 }
 
-#container {
-	width: 870px;
-	margin-left: auto;
-	margin-right: auto;
+a {
+	color: black;
 }
+
+#container {
+	width: 800px;
+	margin: 0 auto;
+}
+
 #game {
 	width: 800px;
 	height: 640px;
-	background-color:black;
 	background-image:url(space.jpg);
 }

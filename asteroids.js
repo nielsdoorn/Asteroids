@@ -61,11 +61,16 @@ var space = false;
 var shift = false;
 
 // rockets: een lijst met afgevuurde raketten
-var rockets;
+var rockets = [];
 // explosion particles
 var explosions = [];
 // lijst met alle asteroids
 var asteroids;
+
+window.onload = function() {
+	init();
+	initAnimation();
+}
 
 
 function init() {
@@ -125,7 +130,7 @@ function initAnimation() {
 	})();
 	
 	(function animloop(){
-		requestAnimFrame(animloop);
+		
 		moveShip();
 		moveRockets();
 		moveExplosions();
@@ -151,6 +156,7 @@ function initAnimation() {
 		cleanUp();
 		maxScore = score > maxScore ? score : maxScore;
 		tekenScherm();
+		requestAnimFrame(animloop);
 	})();
 }
 
@@ -168,7 +174,7 @@ function moveShip() {
 	
 	// accelerate
 	if (up) {
-		beta = Math.PI - (Math.PI / 2) - rotation;
+		beta = (Math.PI / 2) - rotation;
 		richtingsVector[0] += Math.sin(rotation) * ACCELERATION;
 		richtingsVector[1] += Math.sin(beta) * ACCELERATION;
 	} 
@@ -218,7 +224,7 @@ function explode(explosionX, explosionY, color) {
 function moveRockets() {
 	for (var i = 0; i < rockets.length; i++) {
 		var rocket = rockets[i];
-		beta = Math.PI - (Math.PI / 2) - rocket[2];
+		beta = (Math.PI / 2) - rocket[2];
 		rocket[0] += Math.sin(rocket[2]) * ROCKET_SPEED;
 		rocket[1] -= Math.sin(beta) * ROCKET_SPEED;
 		if (rocket[0] < 0 || rocket[0] > 800 || rocket[1] < 0 || rocket[1] > 640) {
@@ -231,7 +237,7 @@ function moveRockets() {
 function moveExplosions() {
 	for (var i = 0; i < explosions.length; i++) {
 		var explosion = explosions[i];
-		beta = Math.PI - (Math.PI / 2) - explosion[2];
+		beta = (Math.PI / 2) - explosion[2];
 		explosion[0] += Math.sin(explosion[2]) * (explosion[3] / 10);
 		explosion[1] -= Math.sin(beta) * (explosion[3] / 10);
 		explosion[3]--;
