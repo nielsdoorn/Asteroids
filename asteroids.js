@@ -69,7 +69,7 @@ var asteroids;
 
 window.onload = function() {
 	init();
-	initAnimation();
+	animloop();
 }
 
 
@@ -115,49 +115,33 @@ function init() {
 	}
 }
 
-function initAnimation() {
-	// animatie
-	// vraag aan de browser om maximaal 60 fps te animeren
-	window.requestAnimFrame = (function(callback){
-		return window.requestAnimationFrame ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		window.oRequestAnimationFrame ||
-		window.msRequestAnimationFrame ||
-		function(callback){
-			window.setTimeout(callback, 1000 / 60);
-		};
-	})();
-	
-	(function animloop(){
-		
-		moveShip();
-		moveRockets();
-		moveExplosions();
-		moveAsteroids();
+function animloop(){
+	moveShip();
+	moveRockets();
+	moveExplosions();
+	moveAsteroids();
 
-		
-		if (rocketsFired == MAX_ROCKETS) {
-			stopFiring = true;
-		} 
 
-		if (rocketsFired <= 0) {
-			stopFiring = false;
-		}
+	if (rocketsFired == MAX_ROCKETS) {
+		stopFiring = true;
+	} 
 
-		if (space && health > 0 && !stopFiring) {
-			fire();
-		}
-		if (stopFiring) {
-			rocketsFired -= 5;
-		}
+	if (rocketsFired <= 0) {
+		stopFiring = false;
+	}
 
-		detectCollisions();
-		cleanUp();
-		maxScore = score > maxScore ? score : maxScore;
-		tekenScherm();
-		requestAnimFrame(animloop);
-	})();
+	if (space && health > 0 && !stopFiring) {
+		fire();
+	}
+	if (stopFiring) {
+		rocketsFired -= 5;
+	}
+
+	detectCollisions();
+	cleanUp();
+	maxScore = score > maxScore ? score : maxScore;
+	tekenScherm();
+	requestAnimationFrame(animloop);
 }
 
 
@@ -231,6 +215,9 @@ function moveRockets() {
 			// the rocket left the screen...
 			rocket[3] = true;
 		} 
+		if (shift) {
+			rocket[2] = rocket[2] + (Math.random() * 0.2) - 0.1;
+		}
 	}
 }
 
