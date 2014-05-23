@@ -1,5 +1,5 @@
 // grootte van de asteroids
-const BIG = 40;
+const BIG = 39;
 const SMALL = 10;
 
 // snelheidsfactor van de raketten
