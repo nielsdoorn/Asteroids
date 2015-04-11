@@ -89,7 +89,7 @@ function init() {
 	rockets = [];
 
 	// canvas met het id "game" opvragen uit HTML
-	canvas = document.getElementById("game");
+	canvas = document.querySelector("#game");
 
 	maxWidth = canvas.width;
 	maxHeight = canvas.height;
@@ -104,13 +104,13 @@ function init() {
 	asteroids = [];
 	for (var i = 0; i < 5; i++) {
 		var asteroid = [Math.random() * maxWidth,		// 0 = x positie
-						Math.random() * maxHeight,		// 1 = y positie
-						(Math.random() * 4) - 2,		// 2 = x vector
-						(Math.random() * 4) - 2,		// 3 = y vector
-						BIG,							// 4 = diameter
-						Math.random() * 30,				// 5 = sterkte
-						(Math.random() * 0.04) - 0.02,	// 6 = rotatie richting
-						Math.random() * Math.PI * 2];	// 7 = rotatie
+			Math.random() * maxHeight,		// 1 = y positie
+			(Math.random() * 4) - 2,		// 2 = x vector
+			(Math.random() * 4) - 2,		// 3 = y vector
+			BIG,							// 4 = diameter
+			Math.random() * 30,				// 5 = sterkte
+			(Math.random() * 0.04) - 0.02,	// 6 = rotatie richting
+			Math.random() * Math.PI * 2];	// 7 = rotatie
 		asteroids.push(asteroid);				
 	}
 }
@@ -498,49 +498,49 @@ function drawAsteroids(ctx) {
 // pijltjes toetsen
 function handleKeyDown(evt) {
     evt = evt || window.event;
-    switch (evt.keyCode) {
-        case 37:		// pijltje links
-            left = true;
-            break;
-		case 38:		// pijltje omhoog
-			up = true;
-			break;	
-        case 39:		// pijltje rechts
-            right = true;
-            break;
-		case 40:		// pijltje omlaag
-			down = true;
-			break;
-		case 32:		// spatie
-			space = true;
-			break;	
-		case 16:		// shift
-			shift = true;
-			break;	
-		case 17:		// ctrl
-			spread();
-			break;
-		case 13: 		// enter
-			if (health <= 0 || asteroids.length == 0) {
-				init();
-			}
-			break;
-    }
+  switch (evt.keyCode) {
+      case 37:		// pijltje links
+          left = true;
+          break;
+	case 38:		// pijltje omhoog
+		up = true;
+		break;	
+      case 39:		// pijltje rechts
+          right = true;
+          break;
+	case 40:		// pijltje omlaag
+		down = true;
+		break;
+	case 32:		// spatie
+		space = true;
+		break;	
+	case 16:		// shift
+		shift = true;
+		break;	
+	case 17:		// ctrl
+		spread();
+		break;
+	case 13: 		// enter
+		if (health <= 0 || asteroids.length == 0) {
+			init();
+		}
+		break;
+  }
 }
 
 // pijltjes toetsen
 function handleKeyUp(evt) {
-    evt = evt || window.event;
-    switch (evt.keyCode) {
-        case 37:		// pijltje links
-            left = false;
-            break;
+  evt = evt || window.event;
+  switch (evt.keyCode) {
+    case 37:		// pijltje links
+      left = false;
+      break;
 		case 38:		// pijltje omhoog
 			up = false;
 			break;	
-        case 39:		// pijltje rechts
-            right = false;
-            break;
+     case 39:		// pijltje rechts
+      right = false;
+      break;
 		case 40:		// pijltje omlaag
 			down = false;
 			break;	
